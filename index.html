@@ -1,0 +1,440 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="author" content="Mugeha">
+  <meta name="description" content="Monile Ordering App">
+  <link rel="stylesheet" href="C:\Users\25475\OneDrive\Mobile Ordering App\index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Cabin:ital@1&family=Happy+Monkey&family=Inter:wght@100;400&family=Karla&family=Noto+Sans&family=Noto+Sans+JP&family=Nunito&family=PT+Sans&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <main>
+    <div class="content">
+      <div class="rel">
+      <img src="C:\Users\25475\OneDrive\Mobile Ordering App\burgerking.jpeg" alt="Burger King">
+      <div class="abs">
+      <p>Jimmy's Diner</p>
+      <p>The best pizza and burgers in town</p>
+      </div>
+      </div>
+          <div id="container"></div>
+        </div>
+        <div id="orders"></div>
+        <div class="card-details" id="card-details">
+        <form class="card-inner" id="card-inner">
+          <h4 style="text-align:center;color:whitesmoke;">Enter card details</h4>
+          <input type="text" name="fullName" placeholder="Enter Your Name" aria-label="Full Name" required/>
+          <input type="text" name="card-number" placeholder="Enter card number" aria-label="Card Number" required/>
+          <input type="text" name="CVV" placeholder="Enter cvv" aria-label="CVV" required/>
+          <button type="submit" class="pay-button" id="pay-button">PAY</button>
+        </form>
+      </div>
+      <div id="rating-section" class="rating-section" style="text-align: center; margin-top: 20px;">
+    <p>Please rate your experience:</p>
+    <div id="star-rating">
+      <span class="star" data-rating="1">&#9733;</span>
+      <span class="star" data-rating="2">&#9733;</span>
+      <span class="star" data-rating="3">&#9733;</span>
+      <span class="star" data-rating="4">&#9733;</span>
+      <span class="star" data-rating="5">&#9733;</span>
+    </div>
+  </div>
+        </main>
+
+        <script>
+          const menuArray = [
+    {
+        name: "Pizza",
+        ingredients: ["pepperoni", "mushrom", "mozarella"],
+        id: 0,
+        price: 14,
+        emoji: "🍕"
+    },
+    {
+        name: "Hamburger",
+        ingredients: ["beef", "cheese", "lettuce"],
+        price: 12,
+        emoji: "🍔",
+        id: 1
+    },
+        {
+        name: "Beer",
+        ingredients: ["grain, hops, yeast, water"],
+        price: 12,
+        emoji: "🍺",
+        id: 2
+    }
+]
+
+console.log("Jaackie");
+/* const mybtn = document.getElementById('mybtn')
+const container = document.getElementById('container')
+const orders = document.getElementById("orders")
+const plusSign = document.getElementById('plus-sign');
+*/
+
+/* document.getElementById('click', function(e){
+  if (e.target.dataset.choose){
+    renderOrder(e.target.dataset.choose)
+  }
+})*/
+/* container.addEventListener('click', function (e) {
+  if (e.target.classList.contains('mybtn')) {
+    const chosenItemId = e.target.dataset.choose;
+    handleOrderClick(chosenItemId);
+  }
+});
+
+const orders = []
+/*function handleOrderClick(myId){
+  const myTarget = menuArray.filter(function(menu){
+    return menu.id === myId
+
+    for(let item of myOrders){
+      myOrders.push( `
+      <div>
+        <h4>Your Order</h4>
+        <div class="order">
+          <p>${menu.name}<button id="btn"><small>remove</small></button></p>
+          <p>${menu.price}</p>
+          </div>
+          <div class="total">
+            <p>Total price:</p>
+            <p>${menu.price}</p>
+            </div>
+            <button id="complete-order">Complete Order></button>
+            </div>
+      `)
+    }
+
+
+  })[0]
+
+}*/
+/*function handleOrderClick(chosenItemId) {
+  const chosenItem = menuArray.find(menu => menu.id === parseInt(chosenItemId));
+  myOrders.push(chosenItem);
+
+  renderOrder();
+}*/
+/*
+function renderOrder(){
+  document.getElementById('orders').innerHTML = handleOrderClick(menuArray)
+
+}
+renderOrder()
+
+*/
+let ordersArray = []
+let orderCompleted = false;
+function render(){
+  const container = document.getElementById('container');
+container.innerHTML = getMenuHtml(menuArray);
+
+if(orderCompleted){
+  container.classList.add('order-completed')
+}
+}
+
+
+function getMenuHtml(menuObj){
+  return menuObj.map(menu =>  `
+    <div id="cont">
+      <div class="be-together">
+      <p class="emoji">${menu.emoji}</p>
+      <div>
+        <h4>${menu.name}</h4>
+        <p class="p">${menu.ingredients}</p>
+        <p>$${menu.price}</p>
+        </div>
+        </div>
+        <div id="plus-sign">
+          <button id="mybtn" class="mybtn" data-choose="${menu.id}"> +</button>
+</div>
+</div>
+
+
+    `
+  ).join('')
+
+}
+/*
+ function renderOrder(){
+  const orders = document.getElementById('container')
+  orders.innerHTML = getOrdersHtml();
+}
+function getOrdersHtml() {
+  return ordersArray.map(item => `
+    <div>
+      <h4>Your Order</h4>
+      <div class="order">
+        <p>${item.name}<button class="btn" data-remove="${item.id}"><small>remove</small></button></p>
+        <p>${item.price}</p>
+      </div>
+    </div>
+  `).join('');
+}
+*/
+/*
+function renderOrder(){
+  const orders = document.getElementById("orders");
+  // Clear the existing content
+   orders.innerHTML = ''
+
+
+
+  // Start with the opening tag for order1 div
+  orders.innerHTML = ordersArray.map(order => `
+    <div class="order1">
+      <h4>Your Order</h4>
+    <div style="display:flex;">
+    <p>${order.name}  <button class="btn" data-remove="${order.id}"><small>remove</small></button></p>
+    <p> $${order.price}</p>
+</div>
+</div>
+  `).join('');
+}
+*/
+function renderOrder(){
+  const orders = document.getElementById("orders")
+  let totalPrice = 0;
+
+  let orderDiv = document.querySelector('.order1');
+
+  if(!orderDiv){
+    // If not, create the order1 div
+    orders.innerHTML = `<div class="order1"></div>`
+    orderDiv = document.querySelector('.order1')
+  }
+  // Clear existing content inside order1 div
+  orderDiv.innerHTML = '';
+  if(ordersArray.length > 0){
+    // Display "Your Order" heading only if there are items in the ordersArray
+    orderDiv.innerHTML = '<h4 style="text-align:center;">Your Order</h4>'
+    ordersArray.forEach(order => {
+      orderDiv.innerHTML += `
+
+               <div style="display:flex;justify-content:space-between;">
+                 <p>${order.name} <button class="btn" data-remove="${order.id}"><small style="cursor:pointer;">remove</small></button></p>
+                 <p>$${order.price}</p>
+               </div>
+             </div>
+      `
+      // update total price
+      totalPrice += order.price;
+    })
+    orderDiv.innerHTML += `
+            <div style="display:flex;justify-content:space-between;border-top:1px solid #8B8B8B;">
+              <p>Total Price:</p><p>$${totalPrice}</p>
+              </div>
+              <button id="complete-order">Complete Order</button>
+            </div>`;
+
+  }
+  }
+
+/*
+//  let orderDiv = document.querySelector('order1')
+//  if(!orderDiv){
+    // if not, create the order1 div
+  //  orders.innerHTML = '<div class="order1"></div>';
+  //  orderDiv = document.querySelector('.order1');
+  // }
+// Clear existing content inside order1 div
+
+orders.innerHTML = ''
+ordersArray.forEach(order => {
+  orders.innerHTML += `
+  <h4>Your Order</h4>
+  <div style="display:flex;">
+  <p>${order.name}  <button class="btn" data-remove="${order.id}"><small>remove</small></button></p><p>- $${order.price}</p>
+  </div>
+  `;
+  // Update total Price
+  totalPrice += order.price;
+});
+
+orders.innerHTML += `
+<div style="display:flex;">
+      <p>Total Price:</p><p>$${totalPrice}</p>
+      <button id="complete-order">Complete Order</button>
+    </div>`;
+
+}
+/* orders.innerHTML = ordersArray.map(order => `
+  <div class="order1">
+  <h4>Your Order</h4>
+  <div style="display:flex;">
+  <p>${order.name}  <button class="btn" data-remove="${order.id}"><small>remove</small></button></p><p>- $${order.price}</p>
+  </div>
+  <div style="display:flex;">
+  <p>Total Price:</p><p>${totalPrice}</p>
+    </div>
+  <button id="complete-order">Complete Order</button>
+
+  </div>
+  `).join('')
+}
+ordersArray.forEach(order => {
+  orders.innerHTML += `
+  <div class="order1">
+  <h4>Your Order</h4>
+  <div style="display:flex;">
+  <p>${order.name}  <button class="btn" data-remove="${order.id}"><small>remove</small></button></p><p>- $${order.price}</p>
+  </div>
+  </div>
+  `;
+  totalPrice += order.price;
+});
+
+orders.innerHTML += `
+<div class="order1">
+<div style="display:flex;">
+<p>Total Price:</p><p>$${totalPrice}</p>
+<button id="complete-order">Complete Order</button>
+</div>
+</div>
+`;
+}*/
+/* orders.addEventListener('click', function (e) {
+  if (e.target.classList.contains('btn')) {
+    const removeItemId = parseInt(e.target.dataset.remove);
+    myOrders = myOrders.filter(item => item.id !== removeItemId);
+    renderOrder();
+  }
+});
+*/
+
+document.getElementById('container').addEventListener('click',function(e) {
+  if (!orderCompleted && e.target.classList.contains('mybtn')){
+    const chosenItemId = parseInt(e.target.dataset.choose);
+    const chosenItem = menuArray.find(menu => menu.id === chosenItemId);
+
+    if (chosenItem){
+      ordersArray.push(chosenItem)
+      renderOrder()
+    }
+  }
+})
+
+document.getElementById('orders').addEventListener('click', function(e){
+  if (e.target.classList.contains('btn')){
+    const removeItemId = parseInt(e.target.dataset.remove);
+    const removeIndex = ordersArray.findIndex(order => order.id === removeItemId);
+
+    if (removeIndex !== -1){
+      ordersArray.splice(removeIndex, 1);
+      renderOrder();
+    }
+  }
+  const cardDetails = document.getElementById("card-details")
+  if (e.target.id === 'complete-order'){
+cardDetails.style.display = 'inline'
+  }
+})
+render()
+
+const cardInner = document.getElementById('card-inner')
+cardInner.addEventListener('submit', function(e){
+  e.preventDefault()
+
+  const cardInnerFormData = new FormData(cardInner)
+  const fullName = cardInnerFormData.get('fullName')
+
+  document.getElementById('orders').innerHTML = `
+  <div class="a">
+  <p>Thanks ${fullName}! Your Order is on the way</p>
+  </div>
+  `
+  setTimeout(function(){
+    const ratingSection = document.getElementById('rating-section')
+    ratingSection.style.display = 'inline'
+  },1000)
+})
+document.getElementById('card-details').addEventListener('click', function(e){
+    const cardDetails = document.getElementById("card-details")
+  if(e.target.id === 'pay-button'){
+      cardDetails.style.display = 'none'
+  }
+})
+const starRating = document.getElementById('star-rating');
+  let selectedRating = 0;
+
+  starRating.addEventListener('click', function (e) {
+    if (e.target.classList.contains('star')) {
+      const clickedRating = parseInt(e.target.getAttribute('data-rating'));
+
+      // Update selected rating and apply styles
+      updateStarRating(clickedRating);
+      setTimeout(() => {
+       const ratingSection = document.getElementById('rating-section');
+       ratingSection.innerHTML = '<p>👍 Thank you for your feedback!</p>';
+     }, 500);
+    }
+  });
+  function updateStarRating(clickedRating) {
+      selectedRating = clickedRating;
+
+      const stars = document.querySelectorAll('.star');
+      stars.forEach((star, index) => {
+        if (index <= clickedRating - 1) {
+          star.classList.add('selected');
+        } else {
+          star.classList.remove('selected');
+        }
+      });
+    }
+
+/*
+plusSign.addEventListener('click', function(){
+  const isButton = event.target.id === 'mybtn';
+  if (!isButton){
+    return;
+  }
+
+    return `
+  <h4>Your Order</h4>
+  <div class="order">
+    <p>${name}<button id="btn"><small>remove</small></button></p>
+    <p>${price}</p>
+    </div>
+    <div class="total">
+      <p>Total price:</p>
+      <p>${}</p>
+      </div>
+      <button id="complete-order">Complete Order></button>
+  `
+})*/
+/*
+let orderArray = []
+function getIndividualOrder(){
+
+  menuArray.map(function(menu){
+    orderArray.push( `
+    <div>
+      <h4>Your Order</h4>
+      <div class="order">
+        <p>${menu.name}<button id="btn"><small>remove</small></button></p>
+        <p>${menu.price}</p>
+        </div>
+        <div class="total">
+          <p>Total price:</p>
+          <p>${menu.price}</p>
+          </div>
+          <button id="complete-order">Complete Order></button>
+          </div>
+
+    `)
+  })
+getIndividualOrder(menuArray)
+}*/
+
+
+
+</script>
+</body>
+
+      </html>
